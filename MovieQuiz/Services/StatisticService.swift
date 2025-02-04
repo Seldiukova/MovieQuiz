@@ -23,7 +23,7 @@ final class StatisticService: StatisticServiceProtocol {
 
     var gamesCount: Int {
         get {
-            return storage.integer(forKey: Keys.gamesCount.rawValue)
+            storage.integer(forKey: Keys.gamesCount.rawValue)
         }
         set {
             storage.set(newValue, forKey: Keys.gamesCount.rawValue)
@@ -32,18 +32,14 @@ final class StatisticService: StatisticServiceProtocol {
 
     var bestGame: GameResult {
         get {
-            let correct = storage.integer(
-                forKey: Keys.bestGame.correct.rawValue)
+            let correct = storage.integer(forKey: Keys.bestGame.correct.rawValue)
             let total = storage.integer(forKey: Keys.bestGame.total.rawValue)
-            let date =
-                storage.object(forKey: Keys.bestGame.date.rawValue) as? Date
-                ?? Date()
+            let date = storage.object(forKey: Keys.bestGame.date.rawValue) as? Date ?? Date()
 
             return GameResult(correct: correct, total: total, date: date)
         }
         set {
-            storage.set(
-                newValue.correct, forKey: Keys.bestGame.correct.rawValue)
+            storage.set(newValue.correct, forKey: Keys.bestGame.correct.rawValue)
             storage.set(newValue.total, forKey: Keys.bestGame.total.rawValue)
             storage.set(newValue.date, forKey: Keys.bestGame.date.rawValue)
         }
@@ -57,12 +53,8 @@ final class StatisticService: StatisticServiceProtocol {
     }
 
     private var correctAnswers: Int {
-        get {
-            return storage.integer(forKey: Keys.correctAnswers.rawValue)
-        }
-        set {
-            storage.set(newValue, forKey: Keys.correctAnswers.rawValue)
-        }
+        get { storage.integer(forKey: Keys.correctAnswers.rawValue) }
+        set { storage.set(newValue, forKey: Keys.correctAnswers.rawValue) }
     }
 
     func store(correct count: Int, total amount: Int) {

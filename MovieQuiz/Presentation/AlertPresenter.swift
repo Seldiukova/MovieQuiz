@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AlertPresenter {
+final class AlertPresenter {
 
     weak var delegate: MovieQuizViewController?
 
@@ -22,7 +22,10 @@ class AlertPresenter {
             message: model.message,
             preferredStyle: .alert)
 
-        let action = UIAlertAction(title: model.buttonText, style: .default) { _ in
+        let action = UIAlertAction(
+            title: model.buttonText,
+            style: .default
+        ) { _ in
             model.completion()
         }
 
