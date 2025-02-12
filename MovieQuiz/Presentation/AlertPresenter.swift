@@ -5,7 +5,6 @@
 //  Created by Ирина  Сельдюкова on 1/24/25.
 //
 
-import Foundation
 import UIKit
 
 final class AlertPresenter {
@@ -21,6 +20,8 @@ final class AlertPresenter {
             title: model.title,
             message: model.message,
             preferredStyle: .alert)
+        
+        alert.view.accessibilityIdentifier = "Game results"
 
         let action = UIAlertAction(
             title: model.buttonText,
