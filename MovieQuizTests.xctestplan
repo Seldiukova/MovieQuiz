@@ -12,7 +12,27 @@
 
   },
   "testTargets" : [
-
+    {
+      "target" : {
+        "containerPath" : "container:MovieQuiz.xcodeproj",
+        "identifier" : "0E5E53162D50A3B30061199A",
+        "name" : "MovieQuizTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:MovieQuiz.xcodeproj",
+        "identifier" : "0E5E53232D50AB720061199A",
+        "name" : "MovieQuizUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:MovieQuiz.xcodeproj",
+        "identifier" : "0ED0FDD22D5C8DDD004E3480",
+        "name" : "MovieQuizPresenterTests"
+      }
+    }
   ],
   "version" : 1
 }
