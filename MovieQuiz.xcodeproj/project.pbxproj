@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E33884E2D5D4D7C00BA31D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD77F5732857F8810062FB14 /* Date+Extensions.swift */; };
+		0E33884F2D5D4D7C00BA31D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD77F5732857F8810062FB14 /* Date+Extensions.swift */; };
+		0E3388502D5D4D7C00BA31D9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD77F5732857F8810062FB14 /* Date+Extensions.swift */; };
 		0E5E53302D51CC750061199A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E532F2D51CC750061199A /* NetworkClient.swift */; };
 		0E5E53322D51CE470061199A /* MostPopularMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E53312D51CE470061199A /* MostPopularMovies.swift */; };
 		0E5E53342D51CECB0061199A /* MoviesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E53332D51CECB0061199A /* MoviesLoader.swift */; };
@@ -470,6 +473,7 @@
 			files = (
 				0EB05B682D5C773A005D05D8 /* QuestionFactory.swift in Sources */,
 				0EB05B602D5C76FA005D05D8 /* StatisticServiceProtocol.swift in Sources */,
+				0E33884E2D5D4D7C00BA31D9 /* Date+Extensions.swift in Sources */,
 				0EB05B4D2D5C7639005D05D8 /* MovieQuizPresenter.swift in Sources */,
 				0EB05B5A2D5C76C6005D05D8 /* MovieQuizViewControllerProtocol.swift in Sources */,
 				0EB05B6C2D5C7759005D05D8 /* NetworkClient.swift in Sources */,
@@ -505,6 +509,7 @@
 				0EB05B672D5C772E005D05D8 /* StatisticService.swift in Sources */,
 				0EB05B592D5C76B1005D05D8 /* QuizQuestion.swift in Sources */,
 				0EB05B6F2D5C775F005D05D8 /* MoviesLoader.swift in Sources */,
+				0E33884F2D5D4D7C00BA31D9 /* Date+Extensions.swift in Sources */,
 				0EB05B572D5C769D005D05D8 /* MovieQuizViewController.swift in Sources */,
 				0EB05B6B2D5C7746005D05D8 /* MostPopularMovies.swift in Sources */,
 				0EB05B532D5C7663005D05D8 /* AlertModel.swift in Sources */,
@@ -519,6 +524,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ED0FDE02D5CBEDC004E3480 /* Array+Extensions.swift in Sources */,
+				0E3388502D5D4D7C00BA31D9 /* Date+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

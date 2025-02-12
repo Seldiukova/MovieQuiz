@@ -1,7 +1,7 @@
 import Foundation
 
 extension Date {
-    public var dateTimeString: String { DateFormatter.defaultDateTime.string(from: self) }
+     var dateTimeString: String { DateFormatter.defaultDateTime.string(from: self) }
 }
 
 private extension DateFormatter {
