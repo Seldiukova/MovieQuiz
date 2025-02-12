@@ -1,9 +1,9 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
-    
+
     // MARK: - IBOutlets
-    
+
     @IBOutlet private weak var yesButton: UIButton!
     @IBOutlet private weak var noButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
@@ -12,13 +12,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
 
     // MARK: - Private properties
-    
+
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
     private let questionsAmount: Int = 10
-    
+
     // MARK: - Private protocol properties
-    
+
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     private var alertPresenter: AlertPresenter?
@@ -107,17 +107,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         imageView.layer.borderColor =
             isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.imageView.layer.borderWidth = 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.imageView.layer.borderWidth = 0
 
-            self.showNextQuestionOrResults()
+            self?.showNextQuestionOrResults()
         }
     }
 
     // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
-        return QuizStepViewModel(
-            image: UIImage(data: model.image) ?? UIImage(),
+        QuizStepViewModel(
+            image: UIImage(data: model.imageData) ?? UIImage(),
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
     }
@@ -153,7 +153,12 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
                 correct: correctAnswers, total: questionsAmount)
 
             let text =
-                "Ваш результат: \(correctAnswers)/10\nКоличество сыгранных квизов: \(statisticService.gamesCount)\nРекорд: \(statisticService.bestGame.correct)/10 (\(statisticService.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%"
+                """
+                Ваш результат: \(correctAnswers)/10
+                Количество сыгранных квизов: \(statisticService.gamesCount)
+                Рекорд: \(statisticService.bestGame.correct)/10 (\(statisticService.bestGame.date.dateTimeString))
+                Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
+                """
 
             let viewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
@@ -173,10 +178,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         guard let currentQuestion = currentQuestion else {
             return
         }
-        let givenAnswer = true
 
         showAnswerResult(
-            isCorrect: givenAnswer == currentQuestion.correctAnswer)
+            isCorrect: currentQuestion.correctAnswer)
     }
 
     // метод вызывается, когда пользователь нажимает на кнопку "Нет"
@@ -184,10 +188,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         guard let currentQuestion = currentQuestion else {
             return
         }
-        let givenAnswer = false
 
         showAnswerResult(
-            isCorrect: givenAnswer == currentQuestion.correctAnswer)
+            isCorrect: !currentQuestion.correctAnswer)
     }
 
 }

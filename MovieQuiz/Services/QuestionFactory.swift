@@ -84,7 +84,7 @@ final class QuestionFactory: QuestionFactoryProtocol {
             let correctAnswer = rating > 7
 
             let question = QuizQuestion(
-                image: imageData,
+                imageData: imageData,
                 text: text,
                 correctAnswer: correctAnswer)
 
