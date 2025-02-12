@@ -4,18 +4,18 @@ final class MovieQuizViewController: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet private weak var yesButton: UIButton!
-    @IBOutlet private weak var noButton: UIButton!
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var textLabel: UILabel!
-    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private var yesButton: UIButton!
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var textLabel: UILabel!
+    @IBOutlet private var counterLabel: UILabel!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
 
     // MARK: - Private properties
-    // MARK: - Private protocol properties
 
-    private var alertPresenter: AlertPresenter?
-    private var presenter: MovieQuizPresenter?
+    // MARK: - Private protocol properties
+    private var alertPresenter: AlertPresenter!
+    private var presenter: MovieQuizPresenter!
 
     // MARK: - Lifecycle methods
 
@@ -26,13 +26,18 @@ final class MovieQuizViewController: UIViewController {
         noButton.layer.cornerRadius = 15
         imageView.layer.cornerRadius = 20
 
-    
-        showLoadingIndicator()
-
-        let alertPresenter = AlertPresenter()
-        alertPresenter.setup(delegate: self)
-        self.alertPresenter = alertPresenter
+        alertPresenter = AlertPresenter(viewController: self)
         presenter = MovieQuizPresenter(viewController: self)
+    }
+
+    // метод вызывается, когда пользователь нажимает на кнопку "Да"
+    @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        presenter?.yesButtonClicked()
+    }
+
+    // метод вызывается, когда пользователь нажимает на кнопку "Нет"
+    @IBAction private func noButtonClicked(_ sender: UIButton) {
+        presenter?.noButtonClicked()
     }
 
     func showLoadingIndicator() {
@@ -59,27 +64,19 @@ final class MovieQuizViewController: UIViewController {
         }
 
         alertPresenter?.show(alert: model)
-    }  // скрываем индикатор загрузки
+    }
 
-    // приватный метод, который меняет цвет рамки
-    // принимает на вход булевое значение и ничего не возвращает
-    func showAnswerResult(isCorrect: Bool) {
-        presenter?.didAnswer(isCorrectAnswer: isCorrect)
-
+    func highlightImageBorder(isCorrectAnswer: Bool) {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor =
-            isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
-
-            
-            self.presenter?.showNextQuestionOrResults()
-        }
+            isCorrectAnswer ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
     }
 
-    // приватный метод вывода на экран вопроса, который принимает на вход вью модель вопроса и ничего не возвращает
+    func hideImageBorder() {
+        imageView.layer.borderWidth = 0
+    }
+
     func show(quiz step: QuizStepViewModel) {
         imageView.image = step.image
         textLabel.text = step.question
@@ -93,26 +90,8 @@ final class MovieQuizViewController: UIViewController {
             buttonText: result.buttonText
         ) {
             self.presenter?.restartGame()
-
-            
-         
         }
 
         alertPresenter?.show(alert: alert)
-
     }
-
-    // приватный метод, который содержит логику перехода в один из сценариев
-    // метод ничего не принимает и ничего не возвращает
-
-    // метод вызывается, когда пользователь нажимает на кнопку "Да"
-    @IBAction private func yesButtonClicked(_ sender: UIButton) {
-        presenter?.yesButtonClicked()
-    }
-
-    // метод вызывается, когда пользователь нажимает на кнопку "Нет"
-    @IBAction private func noButtonClicked(_ sender: UIButton) {
-        presenter?.noButtonClicked()
-    }
-
 }

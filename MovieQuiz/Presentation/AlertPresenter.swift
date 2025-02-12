@@ -9,18 +9,18 @@ import UIKit
 
 final class AlertPresenter {
 
-    weak var delegate: MovieQuizViewController?
+    weak var delegate: MovieQuizViewController!
 
-    func setup(delegate: MovieQuizViewController) {
-        self.delegate = delegate
+    init(viewController: MovieQuizViewController) {
+        delegate = viewController
     }
-    
+
     func show(alert model: AlertModel) {
         let alert = UIAlertController(
             title: model.title,
             message: model.message,
             preferredStyle: .alert)
-        
+
         alert.view.accessibilityIdentifier = "Game results"
 
         let action = UIAlertAction(
